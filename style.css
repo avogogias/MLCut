@@ -1,0 +1,140 @@
+svg {
+  font: 10px sans-serif;
+}
+
+.background path {
+  fill: none;
+  stroke: #ddd;
+  shape-rendering: crispEdges;
+}
+
+.foreground path {
+  fill: none;
+  /* stroke: steelblue; */
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+  cursor: move;
+  }
+
+/*  
+.node circle {
+  fill: #fff; 
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+*/
+
+/*.node rect { */
+.hca rect {
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  /* stroke: #ccc; */
+}
+
+input[type=range][orient=vertical][id=similaritySlider]
+{
+	position: absolute;
+	left: 860px;
+	top: 200px;  
+    background:rgb(255,237,211);
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 4px;
+    height: 240px;
+    padding: 0 5px;
+}
+
+input[type=range][orient=vertical][id=distinctivenessSlider]
+{
+	position: absolute;
+	left: 860px;
+	top: 490px;  
+    background:rgb(255,237,211);
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 4px;
+    height: 240px;
+    padding: 0 5px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background:rgb(251,128,114);
+    /*height:10px;
+    width:10px; */
+}
+
+.clusterCounter_Div {
+  position: absolute;
+	left: 860px;
+	top: 470px; 
+  width: 240px;   
+  font: 12px sans-serif;
+}
+
+.weakEdgeCounter_Div {
+  position: absolute;
+  left: 860px;
+  top: 760px;
+  width: 240px;   
+  font: 12px sans-serif;
+}
+
+.simThres_Div {
+  position: absolute;
+  left: 860px;
+  top: 450px;
+  width: 240px;
+  font: 12px sans-serif;  
+}
+
+.distThres_Div {
+  position: absolute;
+  left: 860px;
+  top: 740px;
+  width: 240px;
+  font: 12px sans-serif;  
+}
+
+/* unvisited link */
+a:link {
+    color: #FF0000;
+}
+
+/* visited link */
+a:visited {
+    color: #00FF00;
+}
+
+/* mouse over link */
+a:hover {
+    color: #FF00FF;
+}
+
+/* selected link */
+a:active {
+    color: #0000FF;
+}
