@@ -15,4 +15,4 @@ Instructions:
 6. Open index.html in you web browser
 7. Enjoy exploring your data with MLCut!
   
-Please don't forget to cite: https://diglib.eg.org/handle/10.2312/cgvc20161288
+Find our paper in: https://diglib.eg.org/handle/10.2312/cgvc20161288
