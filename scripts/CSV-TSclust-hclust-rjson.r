@@ -4,6 +4,9 @@
 # then converts the dendrogram to a JSON format that D3 can read from,
 # and finally exports the .json file (HOX424.json) 
 
+# Here set the .csv filename before running the script
+filename = "DE_FC_HX_Cb_ID" 
+
 library(TSclust) # The diss() method for time-series data
 #library(hclust) # The dist() method is for static data and not time-series 
 #library(vegan)  # The vegdist() method has additional distance metrics to hclust including Jaccard's
@@ -12,15 +15,14 @@ library(rjson)    # Transform R dendrogram to JSON format
 #library(discretization) #  Convert continuous variables into discrete variables
 #library(infotheo) # Includes discretize() function  - other package is 'arules'
 
-#data = read.csv("OV1002CT_trans.csv", header = TRUE)
-data = read.csv("HOX424.csv", header = TRUE)
-#data = read.csv("HOX424_trans_rep.csv", header = TRUE)
+data = read.csv(paste0(filename, ".csv"), header = TRUE)
 
 # HOWTO transpose and manipulate data matrix within R
-data <- data[c(-1, -2),] # Exclude the first two rows (MIN and MAX) from the transpose
-n <- data$NAME # Store names separatelly. Otherwise numerics will become Strings while transforming.
+# TV data <- data[c(-1, -2),] # Exclude the first two rows (MIN and MAX) from the transpose
+# TV n <- data$NAME # Store names separatelly. Otherwise numerics will become Strings while transforming.
+n <- data$ID # Store names separatelly. Otherwise numerics will become Strings while transforming.
 #data <- as.data.frame(t(data[,-1])) # Exclude the names from the transpose.
-data <- data[, -1] # Exclude the names and the first two rows (MIN and MAX) 
+data <- data[, -1] # Exclude the names
 data <- as.data.frame(t(data)) # Transpose!
 colnames(data) <- n # add names later
 #tsdist <- diss(data, "ACF", p=0.05)
@@ -55,4 +57,5 @@ HCtoJSON<-function(hc){
 JSON<-HCtoJSON(hc)
 
 #write(JSON, file = "OV1002CT.json")
-write(JSON, file = "HOX424_EUCL.json")
+write(JSON, file = paste0(filename, ".json"))
+
