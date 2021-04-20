@@ -1,2 +1,4 @@
 d3.v3.min.js
 scripts/*.csv
+scripts/*.json
+scripts/.Rhistory

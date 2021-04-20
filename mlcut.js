@@ -1,3 +1,14 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+This is the main javascript file that uses D3 to visualize
+the dendrogram in a radial layout and also the original data
+using parallel coordinates.
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * */ 
+
+// Edit the following path to match the path where the dendrogram is stored as a JSON file
+var PATH_TO_JSON = "./scripts/DE_FC_OV_Cb_ID.json";
+// Edit the following path to match the path where the original data is stored as a CSV file
+var PATH_TO_CSV = "./scripts/DE_FC_OV_Cb_ID.csv";
+
 var diameter = 960;
 
 var simThres = 0.65;
@@ -138,10 +149,9 @@ function updateZoom(doZoom) {
 	//------------------------------------------------------------------------
 		
 	// This method loads the data from the JSON file
-	//d3.json("dendrogram.json", function(error, json) 
-	d3.json("HOX424_EUCL_new.json", function(error, json) 
-	//d3.json("../hox424/hclust/HOX424_ACF.json", function(error, json)
-	//d3.json("HOX424_20_EUCL.json", function(error, json) 
+	//TV d3.json("HOX424_EUCL_new.json", function(error, json) 
+	// d3.json("../hox424/hclust/HOX424_ACF.json", function(error, json)
+	d3.json(PATH_TO_JSON, function(error, json) 
 	{
 		if (error) throw error;	
 		
@@ -1681,12 +1691,13 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("HOX424.csv", function(error, HOX424) {
+//TV d3.csv("HOX424.csv", function(error, HOX424) {
+d3.csv(PATH_TO_CSV, function(error, data_orig) {	
 
   // Extract the list of dimensions and create a scale for each.
-  x.domain(dimensions = d3.keys(HOX424[0]).filter(function(d) {
-    return d != "NAME" && (y[d] = d3.scale.linear()
-        .domain(d3.extent(HOX424, function(p) { return +p[d]; }))
+  x.domain(dimensions = d3.keys(data_orig[0]).filter(function(d) {
+    return d != "ID" && (y[d] = d3.scale.linear()
+        .domain(d3.extent(data_orig, function(p) { return +p[d]; }))
         .range([height, 0]));
   }));
 
@@ -1694,7 +1705,7 @@ d3.csv("HOX424.csv", function(error, HOX424) {
   background = svg.append("g")
       .attr("class", "background")
     .selectAll("path")
-      .data(HOX424)
+      .data(data_orig)
     .enter().append("path")
       .attr("d", path);
 
@@ -1704,11 +1715,11 @@ d3.csv("HOX424.csv", function(error, HOX424) {
   foreground = svg.append("g")
       .attr("class", "foreground")
     .selectAll("path")
-      .data(HOX424)
+      .data(data_orig)
     .enter().append("path")
       .attr("d", path)
 	  .on('click', function(d) {
-				console.log(d.NAME);
+				console.log(d.ID);
 				//alert( function (d) { // export all selected and marked paths in a file, then later the average could be also extracted.
 				//		d3.select(foreground).selectAll("path")("selected") == 1});
 			})
@@ -1728,7 +1739,7 @@ d3.csv("HOX424.csv", function(error, HOX424) {
 			});
 	  /*
 	  function(d) {
-				console.log(d.NAME);
+				console.log(d.ID);
 				//(d3.select(".hca").selectAll("." + d3.select(this).attr("class")).attr("selected") != 1)
 				var geneSelection = d3.select(".foreground").selectAll("." + d3.select(this).attr("class"));
 				var geneList = Array();
@@ -1749,10 +1760,10 @@ d3.csv("HOX424.csv", function(error, HOX424) {
 			*/	
 			
   foreground.append("svg:title")
-	  .text(function(HOX424) {return HOX424.NAME; });		
+	  .text(function(data_orig) {return data_orig.ID; });		
 
-  foreground.attr("id", function(HOX424) { return HOX424.NAME }) //+ "_PC"; })
-			.attr("class", function(d) { return d.NAME});
+  foreground.attr("id", function(data_orig) { return data_orig.ID }) //+ "_PC"; })
+			.attr("class", function(d) { return d.ID});
 
   // Give the first class to paths
   foreground.each( function(d, i) 
